@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ASCII"?>
+<orm:OrmModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:orm="http://cs.manchester.ac.uk/mdsd/ObjectRelationalMapping" ormTechnology="DoctrineORM" timestampCreation="true" timestampUpdates="true">
+  <dataTypes name="String" displayLabel="String"/>
+  <dataTypes name="Integer" displayLabel="Integer"/>
+  <dataTypes xsi:type="orm:EnumerationType" name="StudyLevel" displayLabel="Study Level">
+    <enumerations name="One" displayLabel="One"/>
+    <enumerations name="Two" displayLabel="Two"/>
+    <enumerations name="Three" displayLabel="Three"/>
+  </dataTypes>
+  <dataTypes name="Boolean" displayLabel="Boolean"/>
+  <dataTypes name="Email" displayLabel="Email"/>
+  <entitiesAndViews xsi:type="orm:Entity" name="University" displayLabel="University" singletonName="University" pluralisedName="University" tableName="university" autoKeyName="id" autoKeyPersistentType="integer">
+    <features xsi:type="orm:SingletonElement" name="title" displayLabel="Title" singletonName="title" pluralisedName="title" cardinality="Required" columnName="title" persistentType="String" ormType="string" required="true" dataType="/university/model/university.orm#//@dataTypes.0"/>
+    <features xsi:type="orm:CollectionAssociation" name="programmes" displayLabel="Programmes" singletonName="programmes" pluralisedName="programmes" cardinality="Many" columnName="programmes_id" opposite="orm:SingletonAssociation /university/model/university.orm#//@entitiesAndViews.1/@features.4" contains="true" pivotTableName="university_programme"/>
+    <features xsi:type="orm:CollectionAssociation" name="courseUnits" displayLabel="Course Units" singletonName="courseUnits" pluralisedName="courseUnits" cardinality="Many" columnName="course_units_id" opposite="orm:SingletonAssociation /university/model/university.orm#//@entitiesAndViews.2/@features.6" contains="true" pivotTableName="university_courseunit"/>
+    <features xsi:type="orm:CollectionAssociation" name="students" displayLabel="Students" singletonName="students" pluralisedName="students" cardinality="Many" columnName="students_id" opposite="orm:SingletonAssociation /university/model/university.orm#//@entitiesAndViews.3/@features.5" contains="true" pivotTableName="university_student"/>
+    <labels name="default" format="%s">
+      <features xsi:type="orm:ModelLabelAttribute" attribute="orm:SingletonElement /university/model/university.orm#//@entitiesAndViews.0/@features.0"/>
+    </labels>
+  </entitiesAndViews>
+  <entitiesAndViews xsi:type="orm:Entity" name="Programme" displayLabel="Programme" singletonName="Programme" pluralisedName="Programme" tableName="programme" autoKeyName="id" autoKeyPersistentType="integer">
+    <features xsi:type="orm:SingletonElement" name="title" displayLabel="Title" singletonName="title" pluralisedName="title" cardinality="Required" columnName="title" persistentType="String" ormType="string" required="true" dataType="/university/model/university.orm#//@dataTypes.0"/>
+    <features xsi:type="orm:SingletonElement" name="code" displayLabel="Code" singletonName="code" pluralisedName="code" cardinality="Required" columnName="code" persistentType="String" ormType="string" required="true" dataType="/university/model/university.orm#//@dataTypes.0"/>
+    <features xsi:type="orm:CollectionAssociation" name="students" displayLabel="Students" opposite="orm:SingletonAssociation /university/model/university.orm#//@entitiesAndViews.3/@features.3" pivotTableName="student_programme"/>
+    <features xsi:type="orm:CollectionAssociation" name="compulsoryUnits" displayLabel="Compulsory Units" singletonName="compulsoryUnits" pluralisedName="compulsoryUnits" cardinality="Many" columnName="compulsory_units_id" opposite="orm:SingletonAssociation /university/model/university.orm#//@entitiesAndViews.2/@features.4" pivotTableName="programme_courseunit" collectionType="/university/model/university.orm#//@collectionTypes.1"/>
+    <features xsi:type="orm:SingletonAssociation" name="offeredBy" displayLabel="Offered By" columnName="offered_by_id" opposite="orm:CollectionAssociation /university/model/university.orm#//@entitiesAndViews.0/@features.1" container="true" owningEnd="true" pivotTableName="university_programme" required="true" associationRelationship="ManyToOne"/>
+    <labels name="default" format="%s">
+      <features xsi:type="orm:ModelLabelAttribute" attribute="orm:SingletonElement /university/model/university.orm#//@entitiesAndViews.1/@features.0"/>
+    </labels>
+  </entitiesAndViews>
+  <entitiesAndViews xsi:type="orm:Entity" name="CourseUnit" displayLabel="Course Unit" singletonName="CourseUnit" pluralisedName="CourseUnit" tableName="courseunit" autoKeyName="id" autoKeyPersistentType="integer">
+    <features xsi:type="orm:SingletonElement" name="title" displayLabel="Title" singletonName="title" pluralisedName="title" cardinality="Required" columnName="title" persistentType="String" ormType="string" required="true" dataType="/university/model/university.orm#//@dataTypes.0"/>
+    <features xsi:type="orm:SingletonElement" name="code" displayLabel="Code" singletonName="code" pluralisedName="code" cardinality="Required" columnName="code" persistentType="String" ormType="string" required="true" dataType="/university/model/university.orm#//@dataTypes.0"/>
+    <features xsi:type="orm:SingletonElement" name="unitLevel" displayLabel="Unit Level" singletonName="unitLevel" pluralisedName="unitLevel" cardinality="Required" columnName="unit_level" persistentType="Integer" ormType="integer" required="true" dataType="/university/model/university.orm#//@dataTypes.2"/>
+    <features xsi:type="orm:SingletonElement" name="credits" displayLabel="Credits" singletonName="credits" pluralisedName="credits" cardinality="Required" columnName="credits" persistentType="Integer" ormType="integer" required="true" dataType="/university/model/university.orm#//@dataTypes.1"/>
+    <features xsi:type="orm:SingletonAssociation" name="invCompulsoryUnits" displayLabel="Inv Compulsory Units" columnName="inv_compulsory_units_id" opposite="orm:CollectionAssociation /university/model/university.orm#//@entitiesAndViews.1/@features.3" owningEnd="true" visible="false" pivotTableName="programme_courseunit" required="true" associationRelationship="ManyToOne"/>
+    <features xsi:type="orm:SingletonAssociation" name="invUnits" displayLabel="Inv Units" columnName="inv_units_id" opposite="orm:CollectionAssociation /university/model/university.orm#//@entitiesAndViews.3/@features.4" owningEnd="true" pivotTableName="student_courseunit" required="true" associationRelationship="ManyToOne"/>
+    <features xsi:type="orm:SingletonAssociation" name="offeredBy" displayLabel="Offered By" columnName="offered_by_id" opposite="orm:CollectionAssociation /university/model/university.orm#//@entitiesAndViews.0/@features.2" container="true" owningEnd="true" pivotTableName="university_courseunit" required="true" associationRelationship="ManyToOne"/>
+    <labels name="default" format="%s">
+      <features xsi:type="orm:ModelLabelAttribute" attribute="orm:SingletonElement /university/model/university.orm#//@entitiesAndViews.2/@features.0"/>
+    </labels>
+  </entitiesAndViews>
+  <entitiesAndViews xsi:type="orm:Entity" name="Student" displayLabel="Student" singletonName="Student" pluralisedName="Student" tableName="student" autoKeyName="id" autoKeyPersistentType="integer">
+    <features xsi:type="orm:SingletonElement" name="familyName" displayLabel="Family Name" singletonName="familyName" pluralisedName="familyName" cardinality="Required" columnName="family_name" persistentType="String" ormType="string" required="true" dataType="/university/model/university.orm#//@dataTypes.0"/>
+    <features xsi:type="orm:SingletonElement" name="forenames" displayLabel="Forenames" singletonName="forenames" pluralisedName="forenames" cardinality="Required" columnName="forenames" persistentType="String" ormType="string" required="true" dataType="/university/model/university.orm#//@dataTypes.0"/>
+    <features xsi:type="orm:SingletonElement" name="currentLevel" displayLabel="Current Level" singletonName="currentLevel" pluralisedName="currentLevel" columnName="current_level" persistentType="Integer" ormType="integer" dataType="/university/model/university.orm#//@dataTypes.2"/>
+    <features xsi:type="orm:SingletonAssociation" name="programme" displayLabel="Programme" singletonName="programme" pluralisedName="programme" cardinality="Required" columnName="programme_id" opposite="orm:CollectionAssociation /university/model/university.orm#//@entitiesAndViews.1/@features.2" owningEnd="true" pivotTableName="student_programme" required="true" associationRelationship="ManyToOne"/>
+    <features xsi:type="orm:CollectionAssociation" name="units" displayLabel="Units" singletonName="units" pluralisedName="units" cardinality="Many" columnName="units_id" opposite="orm:SingletonAssociation /university/model/university.orm#//@entitiesAndViews.2/@features.5" pivotTableName="student_courseunit" collectionType="/university/model/university.orm#//@collectionTypes.1"/>
+    <features xsi:type="orm:SingletonAssociation" name="studingAt" displayLabel="Studing At" columnName="studing_at_id" opposite="orm:CollectionAssociation /university/model/university.orm#//@entitiesAndViews.0/@features.3" container="true" owningEnd="true" pivotTableName="university_student" required="true" associationRelationship="ManyToOne"/>
+  </entitiesAndViews>
+  <collectionTypes name="CollectionProgramme" collectionType="Set" elementType="orm:Entity /university/model/university.orm#//@entitiesAndViews.1"/>
+  <collectionTypes name="CollectionCourseUnit" collectionType="Set" elementType="orm:Entity /university/model/university.orm#//@entitiesAndViews.2"/>
+  <collectionTypes name="CollectionStudent" collectionType="Set" elementType="orm:Entity /university/model/university.orm#//@entitiesAndViews.3"/>
+  <collectionTypes collectionType="Set" elementType="orm:Entity /university/model/university.orm#//@entitiesAndViews.3"/>
+</orm:OrmModel>

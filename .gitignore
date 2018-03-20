@@ -1,0 +1,31 @@
+.env.dist
+composer.json
+composer.lock
+package.json
+phpunit.xml.dist
+symfony.lock
+webpack.config.js
+/bin/
+/assets/
+/config/
+/public/
+/src/
+/templates/
+/tests/
+/translations/
+###> symfony/framework-bundle ###
+.env
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/webpack-encore-pack ###
+/node_modules/
+/public/build/
+###< symfony/webpack-encore-pack ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
+/phpunit.xml
+###< symfony/phpunit-bridge ###

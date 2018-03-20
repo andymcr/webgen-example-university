@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ASCII"?>
+<service:ServiceModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:service="http://cs.manchester.ac.uk/mdsd/Service">
+  <services name="University">
+    <serves href="/university/model/university.orm#//@entitiesAndViews.0"/>
+  </services>
+  <services name="Programme">
+    <serves href="/university/model/university.orm#//@entitiesAndViews.1"/>
+  </services>
+  <services name="CourseUnit">
+    <serves href="/university/model/university.orm#//@entitiesAndViews.2"/>
+  </services>
+  <services name="Student">
+    <serves href="/university/model/university.orm#//@entitiesAndViews.3"/>
+  </services>
+</service:ServiceModel>

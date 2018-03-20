@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<website:WebGenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:webgen-base="http://cs.man.ac.uk/mdsd/webgen/base" xmlns:webgen-persistence="http://cs.man.ac.uk/mdsd/webgen/persistence" xmlns:webgen-webui="http://cs.man.ac.uk/mdsd/webgen/webui" xmlns:website="http://www.cs.man.ac.uk/mdsd/2010/Website" frameworkTechnology="Symfony">
+  <websiteProperties siteTitle="Universities" webmasterEmail="webmaster@universities.com" frameworkTechnology="Symfony"/>
+  <persistence ormTechnology="DoctrineORM">
+    <dataTypes name="String"/>
+    <dataTypes name="Integer"/>
+    <dataTypes xsi:type="webgen-base:EnumerationType" name="StudyLevel">
+      <enumerations name="One"/>
+      <enumerations name="Two"/>
+      <enumerations name="Three"/>
+    </dataTypes>
+    <entities xsi:type="webgen-persistence:Entity" name="University">
+      <entityFeatures xsi:type="webgen-persistence:DataTypeAttribute" name="title" cardinality="Required" dataType="//@persistence/@dataTypes.0"/>
+      <entityFeatures xsi:type="webgen-persistence:AssociationWithContainment" name="programmes" cardinality="Many" targetEntity="//@persistence/@entities.1" bidirectional="true" targetFeatureName="offeredBy"/>
+      <entityFeatures xsi:type="webgen-persistence:AssociationWithContainment" name="courseUnits" cardinality="Many" targetEntity="//@persistence/@entities.2" bidirectional="true" targetFeatureName="offeredBy"/>
+      <entityFeatures xsi:type="webgen-persistence:AssociationWithContainment" name="students" cardinality="Many" targetEntity="//@persistence/@entities.3" bidirectional="true" targetFeatureName="studingAt"/>
+    </entities>
+    <entities xsi:type="webgen-persistence:Entity" name="Programme" associationEnds="//@persistence/@entities.0/@entityFeatures.1 //@persistence/@entities.3/@entityFeatures.2">
+      <entityFeatures xsi:type="webgen-persistence:DataTypeAttribute" name="title" title="" cardinality="Required" dataType="//@persistence/@dataTypes.0"/>
+      <entityFeatures xsi:type="webgen-persistence:DataTypeAttribute" name="code" cardinality="Required" dataType="//@persistence/@dataTypes.0"/>
+      <entityFeatures xsi:type="webgen-persistence:AssociationWithoutContainment" name="compulsoryUnits" cardinality="Many" targetEntity="//@persistence/@entities.2"/>
+    </entities>
+    <entities xsi:type="webgen-persistence:Entity" name="CourseUnit" associationEnds="//@persistence/@entities.0/@entityFeatures.2 //@persistence/@entities.1/@entityFeatures.2 //@persistence/@entities.3/@entityFeatures.4">
+      <entityFeatures xsi:type="webgen-persistence:DataTypeAttribute" name="title" title="" cardinality="Required" dataType="//@persistence/@dataTypes.0"/>
+      <entityFeatures xsi:type="webgen-persistence:DataTypeAttribute" name="code" cardinality="Required" dataType="//@persistence/@dataTypes.0"/>
+      <entityFeatures xsi:type="webgen-persistence:DataTypeAttribute" name="unitLevel" cardinality="Required" dataType="//@persistence/@dataTypes.2"/>
+      <entityFeatures xsi:type="webgen-persistence:DataTypeAttribute" name="credits" cardinality="Required" dataType="//@persistence/@dataTypes.1"/>
+    </entities>
+    <entities xsi:type="webgen-persistence:Entity" name="Student" associationEnds="//@persistence/@entities.0/@entityFeatures.3">
+      <entityFeatures xsi:type="webgen-persistence:DataTypeAttribute" name="familyName" cardinality="Required" dataType="//@persistence/@dataTypes.0"/>
+      <entityFeatures xsi:type="webgen-persistence:DataTypeAttribute" name="forenames" cardinality="Required" dataType="//@persistence/@dataTypes.0"/>
+      <entityFeatures xsi:type="webgen-persistence:AssociationWithoutContainment" name="programme" cardinality="Required" targetEntity="//@persistence/@entities.1" bidirectional="true" targetFeatureName="students" targetCardinality="Many"/>
+      <entityFeatures xsi:type="webgen-persistence:DataTypeAttribute" name="currentLevel" dataType="//@persistence/@dataTypes.2"/>
+      <entityFeatures xsi:type="webgen-persistence:AssociationWithoutContainment" name="units" cardinality="Many" targetEntity="//@persistence/@entities.2" bidirectional="true"/>
+    </entities>
+  </persistence>
+  <services/>
+  <webUI>
+    <pages name="Universities" childPages="//@webUI/@pages.1/@parentPage">
+      <units xsi:type="webgen-webui:IndexUnit" name="Universities" contentType="//@persistence/@entities.0">
+        <displayFields xsi:type="webgen-webui:UnitElement" attribute="//@persistence/@entities.0/@entityFeatures.0"/>
+        <actions xsi:type="webgen-webui:SelectAction" name="details" target="//@webUI/@pages.1/@units.0"/>
+        <actions xsi:type="webgen-webui:DeleteAction" name="delete"/>
+      </units>
+    </pages>
+    <pages name="University" childPages="//@webUI/@pages.2/@parentPage //@webUI/@pages.3/@parentPage //@webUI/@pages.4/@parentPage">
+      <units xsi:type="webgen-webui:DetailsUnit" name="University" title="//@persistence/@entities.0/@entityFeatures.0" contentType="//@persistence/@entities.0">
+        <displayFields xsi:type="webgen-webui:UnitAssociation" collectionDisplayOption="PageDirection" association="//@persistence/@entities.0/@entityFeatures.1">
+          <actions xsi:type="webgen-webui:SelectAction" name="manage" target="//@webUI/@pages.2/@units.0"/>
+        </displayFields>
+        <displayFields xsi:type="webgen-webui:UnitAssociation" collectionDisplayOption="PageDirection" association="//@persistence/@entities.0/@entityFeatures.2">
+          <actions xsi:type="webgen-webui:SelectAction" name="manage" target="//@webUI/@pages.3/@units.0"/>
+        </displayFields>
+        <displayFields xsi:type="webgen-webui:UnitAssociation" collectionDisplayOption="PageDirection" association="//@persistence/@entities.0/@entityFeatures.3">
+          <actions xsi:type="webgen-webui:SelectAction" name="manage" target="//@webUI/@pages.4/@units.0"/>
+        </displayFields>
+      </units>
+      <parentPage targetPage="//@webUI/@pages.0"/>
+    </pages>
+    <pages name="Programmes">
+      <units xsi:type="webgen-webui:IndexUnit" name="Programmes" contentType="//@persistence/@entities.1"/>
+      <parentPage targetPage="//@webUI/@pages.1"/>
+    </pages>
+    <pages name="Units">
+      <units xsi:type="webgen-webui:IndexUnit" name="Units" contentType="//@persistence/@entities.2"/>
+      <parentPage targetPage="//@webUI/@pages.1"/>
+    </pages>
+    <pages name="Students">
+      <units xsi:type="webgen-webui:IndexUnit" name="Students" contentType="//@persistence/@entities.3"/>
+      <parentPage targetPage="//@webUI/@pages.1"/>
+    </pages>
+  </webUI>
+</website:WebGenModel>

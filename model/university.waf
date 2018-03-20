@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:orm="http://cs.manchester.ac.uk/mdsd/ObjectRelationalMapping" xmlns:waf="http://cs.manchester.ac.uk/mdsd/WebApplicationFramework">
+  <waf:Page name="Universities" displayLabel="Universities" childPages="/1">
+    <units xsi:type="waf:IndexGridUnit" name="Universities" displayLabel="Universities" uriElement="universities" captionClass="unit_caption" styleClass="unit index_unit" contentClass="striped responsive-table" messageWhenHidden="" headerClass="unit_header" controlClass="unit_control" footerClass="unit_footer" errorClass="error" defaultPaginationSize="10" nextNpages="2" previousNpages="2" nextPageLabel="&amp;gt;" nextPageIconName="chevron_right" previousPageLabel="&amp;lt;" previousPageIconName="chevron_left" useDisabledPageLinks="true" firstPageIconName="first_page" lastPageIconName="last_page" paginationClass="pagination" paginationElementClass="waves_effect" rowClasses="odd_row even_row">
+      <displayFields xsi:type="waf:UnitAttribute" displayLabel="Title" title="Title" truncate="false" collectionUiAllowAdd="false" collectionUiAllowRemove="false" inputClass="input-field col s12" placeholder="Title">
+        <attribute xsi:type="orm:SingletonElement" href="/university/model/university.orm#//@entitiesAndViews.0/@features.0"/>
+      </displayFields>
+      <servicesUsed href="/university/model/university.business#//@services.0"/>
+      <contentType href="/university/model/university.orm#//@entitiesAndViews.0"/>
+      <actions xsi:type="waf:SelectAction" name="details" displayLabel="Details" target="/1/@units.0"/>
+      <actions xsi:type="waf:DeleteAction" name="delete" displayLabel="Delete" confirmMessage="Delete?" requiresRole="" uriElement="delete"/>
+    </units>
+  </waf:Page>
+  <waf:Page name="University" displayLabel="University" parentPage="/0" childPages="/2 /3 /4">
+    <units xsi:type="waf:DetailsUnit" name="University" displayLabel="University" uriElement="university" captionClass="unit_caption" styleClass="unit details_unit" contentClass="details_content" messageWhenHidden="" headerClass="unit_header" controlClass="unit_control" footerClass="unit_footer" errorClass="error" selectors="/0/@units.0/@actions.0">
+      <displayFields xsi:type="waf:UnitAssociation" displayLabel="Programmes" title="Programmes" collectionDisplayOption="PageDirection" truncate="false" collectionUiAllowAdd="false" collectionUiAllowRemove="false" inputClass="input-field col s12">
+        <actions xsi:type="waf:SelectAction" name="manage" displayLabel="Manage" target="/2/@units.0"/>
+        <association xsi:type="orm:CollectionAssociation" href="/university/model/university.orm#//@entitiesAndViews.0/@features.1"/>
+      </displayFields>
+      <displayFields xsi:type="waf:UnitAssociation" displayLabel="Course Units" title="Course Units" collectionDisplayOption="PageDirection" truncate="false" collectionUiAllowAdd="false" collectionUiAllowRemove="false" inputClass="input-field col s12">
+        <actions xsi:type="waf:SelectAction" name="manage" displayLabel="Manage" target="/3/@units.0"/>
+        <association xsi:type="orm:CollectionAssociation" href="/university/model/university.orm#//@entitiesAndViews.0/@features.2"/>
+      </displayFields>
+      <displayFields xsi:type="waf:UnitAssociation" displayLabel="Students" title="Students" collectionDisplayOption="PageDirection" truncate="false" collectionUiAllowAdd="false" collectionUiAllowRemove="false" inputClass="input-field col s12">
+        <actions xsi:type="waf:SelectAction" name="manage" displayLabel="Manage" target="/4/@units.0"/>
+        <association xsi:type="orm:CollectionAssociation" href="/university/model/university.orm#//@entitiesAndViews.0/@features.3"/>
+      </displayFields>
+      <servicesUsed href="/university/model/university.business#//@services.0"/>
+      <title xsi:type="orm:SingletonElement" href="/university/model/university.orm#//@entitiesAndViews.0/@features.0"/>
+      <contentType href="/university/model/university.orm#//@entitiesAndViews.0"/>
+    </units>
+  </waf:Page>
+  <waf:Page name="Programmes" displayLabel="Programmes" parentPage="/1">
+    <units xsi:type="waf:IndexGridUnit" name="Programmes" displayLabel="Programmes" uriElement="programmes" captionClass="unit_caption" styleClass="unit index_unit" contentClass="striped responsive-table" messageWhenHidden="" headerClass="unit_header" controlClass="unit_control" footerClass="unit_footer" errorClass="error" selectors="/1/@units.0/@displayFields.0/@actions.0" defaultPaginationSize="10" nextNpages="2" previousNpages="2" nextPageLabel="&amp;gt;" nextPageIconName="chevron_right" previousPageLabel="&amp;lt;" previousPageIconName="chevron_left" useDisabledPageLinks="true" firstPageIconName="first_page" lastPageIconName="last_page" paginationClass="pagination" paginationElementClass="waves_effect" rowClasses="odd_row even_row">
+      <displayFields xsi:type="waf:UnitAttribute" displayLabel="Title" title="Title" placeholder="Title">
+        <attribute xsi:type="orm:SingletonElement" href="/university/model/university.orm#//@entitiesAndViews.1/@features.0"/>
+      </displayFields>
+      <displayFields xsi:type="waf:UnitAttribute" displayLabel="Code" title="Code" placeholder="Code">
+        <attribute xsi:type="orm:SingletonElement" href="/university/model/university.orm#//@entitiesAndViews.1/@features.1"/>
+      </displayFields>
+      <displayFields xsi:type="waf:UnitAssociation" displayLabel="Students" title="Students" headerClass="?? XXXX ??" inputClass="?? XXXX ??" displayClass="?? XXXX ??" footerClass="?? XXXX ??">
+        <association xsi:type="orm:CollectionAssociation" href="/university/model/university.orm#//@entitiesAndViews.1/@features.2"/>
+      </displayFields>
+      <displayFields xsi:type="waf:UnitAssociation" displayLabel="Compulsory Units" title="Compulsory Units">
+        <association xsi:type="orm:CollectionAssociation" href="/university/model/university.orm#//@entitiesAndViews.1/@features.3"/>
+      </displayFields>
+      <displayFields xsi:type="waf:UnitAssociation" displayLabel="Offered By" title="Offered By" headerClass="?? XXXX ??" inputClass="?? XXXX ??" displayClass="?? XXXX ??" footerClass="?? XXXX ??">
+        <association xsi:type="orm:SingletonAssociation" href="/university/model/university.orm#//@entitiesAndViews.1/@features.4"/>
+      </displayFields>
+      <servicesUsed href="/university/model/university.business#//@services.1"/>
+      <servicesUsed href="/university/model/university.business#//@services.0"/>
+      <contentType href="/university/model/university.orm#//@entitiesAndViews.1"/>
+      <containerType href="/university/model/university.orm#//@entitiesAndViews.0"/>
+      <containerService href="/university/model/university.business#//@services.0"/>
+    </units>
+  </waf:Page>
+  <waf:Page name="Units" displayLabel="Units" parentPage="/1">
+    <units xsi:type="waf:IndexGridUnit" name="Units" displayLabel="Units" uriElement="units" captionClass="unit_caption" styleClass="unit index_unit" contentClass="striped responsive-table" messageWhenHidden="" headerClass="unit_header" controlClass="unit_control" footerClass="unit_footer" errorClass="error" selectors="/1/@units.0/@displayFields.1/@actions.0" defaultPaginationSize="10" nextNpages="2" previousNpages="2" nextPageLabel="&amp;gt;" nextPageIconName="chevron_right" previousPageLabel="&amp;lt;" previousPageIconName="chevron_left" useDisabledPageLinks="true" firstPageIconName="first_page" lastPageIconName="last_page" paginationClass="pagination" paginationElementClass="waves_effect" rowClasses="odd_row even_row">
+      <displayFields xsi:type="waf:UnitAttribute" displayLabel="Title" title="Title" placeholder="Title">
+        <attribute xsi:type="orm:SingletonElement" href="/university/model/university.orm#//@entitiesAndViews.2/@features.0"/>
+      </displayFields>
+      <displayFields xsi:type="waf:UnitAttribute" displayLabel="Code" title="Code" placeholder="Code">
+        <attribute xsi:type="orm:SingletonElement" href="/university/model/university.orm#//@entitiesAndViews.2/@features.1"/>
+      </displayFields>
+      <displayFields xsi:type="waf:UnitAttribute" displayLabel="Unit Level" title="Unit Level" placeholder="Unit Level">
+        <attribute xsi:type="orm:SingletonElement" href="/university/model/university.orm#//@entitiesAndViews.2/@features.2"/>
+      </displayFields>
+      <displayFields xsi:type="waf:UnitAttribute" displayLabel="Credits" title="Credits" placeholder="Credits">
+        <attribute xsi:type="orm:SingletonElement" href="/university/model/university.orm#//@entitiesAndViews.2/@features.3"/>
+      </displayFields>
+      <displayFields xsi:type="waf:UnitAssociation" displayLabel="Inv Units" title="Inv Units" headerClass="?? XXXX ??" inputClass="?? XXXX ??" displayClass="?? XXXX ??" footerClass="?? XXXX ??">
+        <association xsi:type="orm:SingletonAssociation" href="/university/model/university.orm#//@entitiesAndViews.2/@features.5"/>
+      </displayFields>
+      <displayFields xsi:type="waf:UnitAssociation" displayLabel="Offered By" title="Offered By" headerClass="?? XXXX ??" inputClass="?? XXXX ??" displayClass="?? XXXX ??" footerClass="?? XXXX ??">
+        <association xsi:type="orm:SingletonAssociation" href="/university/model/university.orm#//@entitiesAndViews.2/@features.6"/>
+      </displayFields>
+      <servicesUsed href="/university/model/university.business#//@services.2"/>
+      <servicesUsed href="/university/model/university.business#//@services.0"/>
+      <contentType href="/university/model/university.orm#//@entitiesAndViews.2"/>
+      <containerType href="/university/model/university.orm#//@entitiesAndViews.0"/>
+      <containerService href="/university/model/university.business#//@services.0"/>
+    </units>
+  </waf:Page>
+  <waf:Page name="Students" displayLabel="Students" parentPage="/1">
+    <units xsi:type="waf:IndexGridUnit" name="Students" displayLabel="Students" uriElement="students" captionClass="unit_caption" styleClass="unit index_unit" contentClass="striped responsive-table" messageWhenHidden="" headerClass="unit_header" controlClass="unit_control" footerClass="unit_footer" errorClass="error" selectors="/1/@units.0/@displayFields.2/@actions.0" defaultPaginationSize="10" nextNpages="2" previousNpages="2" nextPageLabel="&amp;gt;" nextPageIconName="chevron_right" previousPageLabel="&amp;lt;" previousPageIconName="chevron_left" useDisabledPageLinks="true" firstPageIconName="first_page" lastPageIconName="last_page" paginationClass="pagination" paginationElementClass="waves_effect" rowClasses="odd_row even_row">
+      <displayFields xsi:type="waf:UnitAttribute" displayLabel="Family Name" title="Family Name" placeholder="Family Name">
+        <attribute xsi:type="orm:SingletonElement" href="/university/model/university.orm#//@entitiesAndViews.3/@features.0"/>
+      </displayFields>
+      <displayFields xsi:type="waf:UnitAttribute" displayLabel="Forenames" title="Forenames" placeholder="Forenames">
+        <attribute xsi:type="orm:SingletonElement" href="/university/model/university.orm#//@entitiesAndViews.3/@features.1"/>
+      </displayFields>
+      <displayFields xsi:type="waf:UnitAttribute" displayLabel="Current Level" title="Current Level" placeholder="Current Level">
+        <attribute xsi:type="orm:SingletonElement" href="/university/model/university.orm#//@entitiesAndViews.3/@features.2"/>
+      </displayFields>
+      <displayFields xsi:type="waf:UnitAssociation" displayLabel="Programme" title="Programme">
+        <association xsi:type="orm:SingletonAssociation" href="/university/model/university.orm#//@entitiesAndViews.3/@features.3"/>
+      </displayFields>
+      <displayFields xsi:type="waf:UnitAssociation" displayLabel="Units" title="Units">
+        <association xsi:type="orm:CollectionAssociation" href="/university/model/university.orm#//@entitiesAndViews.3/@features.4"/>
+      </displayFields>
+      <displayFields xsi:type="waf:UnitAssociation" displayLabel="Studing At" title="Studing At" headerClass="?? XXXX ??" inputClass="?? XXXX ??" displayClass="?? XXXX ??" footerClass="?? XXXX ??">
+        <association xsi:type="orm:SingletonAssociation" href="/university/model/university.orm#//@entitiesAndViews.3/@features.5"/>
+      </displayFields>
+      <servicesUsed href="/university/model/university.business#//@services.3"/>
+      <servicesUsed href="/university/model/university.business#//@services.0"/>
+      <contentType href="/university/model/university.orm#//@entitiesAndViews.3"/>
+      <containerType href="/university/model/university.orm#//@entitiesAndViews.0"/>
+      <containerService href="/university/model/university.business#//@services.0"/>
+    </units>
+  </waf:Page>
+</xmi:XMI>
